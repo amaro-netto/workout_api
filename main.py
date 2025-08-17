@@ -1,15 +1,7 @@
-# Importa a classe FastAPI
 from fastapi import FastAPI
+from workout_api.routers import api_router
+from fastapi_pagination import add_pagination
 
-# Cria uma instância da nossa API
-app = FastAPI()
-
-# Cria um "caminho" (endpoint) que responde a uma requisição GET
-# Quando alguém acessar a URL principal, a função 'hello' será chamada.
-@app.get("/")
-def hello():
-    return {"message": "Hello World!"}
-
-# Para rodar a sua API, vamos usar o uvicorn, que já instalamos.
-# No terminal, com o ambiente virtual ativado, digite:
-# uvicorn main:app --reload
+app = FastAPI(title='WorkoutApi')
+app.include_router(api_router)
+add_pagination(app)
