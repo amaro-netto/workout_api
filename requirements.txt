@@ -5,3 +5,4 @@ pydantic
 fastapi-pagination
 alembic
 psycopg2-binary
+pydantic-settings
