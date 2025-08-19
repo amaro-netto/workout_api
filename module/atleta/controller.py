@@ -35,18 +35,9 @@ async def post(
         if not centro_treinamento:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Centro de treinamento não encontrado.")
 
-        # Cria o objeto AtletaModel
-        atleta = AtletaModel(
-            nome=atleta_in.nome,
-            cpf=atleta_in.cpf,
-            idade=atleta_in.idade,
-            peso=atleta_in.peso,
-            altura=atleta_in.altura,
-            sexo=atleta_in.sexo,
-            created_at=datetime.utcnow(),
-            categoria_id=categoria.pk_id,
-            centro_treinamento_id=centro_treinamento.pk_id
-        )
+        # Ajuste na criação do objeto AtletaModel
+        atleta_dict = atleta_in.model_dump(exclude={'categoria', 'centro_treinamento'})
+        atleta = AtletaModel(**atleta_dict, created_at=datetime.utcnow(), categoria_id=categoria.pk_id, centro_treinamento_id=centro_treinamento.pk_id)
 
         db_session.add(atleta)
         await db_session.commit()
