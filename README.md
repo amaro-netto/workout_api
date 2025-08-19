@@ -20,7 +20,17 @@
 
 ## Descrição do Projeto
 
-Esta é uma API de competição de crossfit chamada WorkoutAPI[cite: 53]. [cite_start]É uma API pequena, devido a ser um projeto mais hands-on e simplificado. A API é assíncrona, o que significa que a linguagem tem um jeito de dizer para o computador / programa que em certo ponto, ele terá que esperar por algo para finalizar em outro lugar.
+Esta é uma API de competição de crossfit chamada WorkoutAPI.
+É uma API pequena, devido a ser um projeto mais hands-on e simplificado. A API é assíncrona, o que significa que a linguagem tem um jeito de dizer para o computador / programa que em certo ponto, ele terá que esperar por algo para finalizar em outro lugar.
+
+### Desafio Final
+
+Este projeto foi desenvolvido como parte de um desafio proposto pela Digital Innovation One (DIO) no Bootcamp Python. O objetivo foi implementar as seguintes funcionalidades:
+
+* **Adicionar Query Parameters nos Endpoints:** Implementar filtragem de atletas por `nome` e `cpf` no endpoint de listagem.
+* **Customizar Resposta de Retorno:** No endpoint `GET /atletas`, retornar apenas o `nome`, `centro_treinamento` e `categoria` do atleta.
+* **Manipular Exceção de Integridade dos Dados:** Retornar uma mensagem de erro customizada e o status `303` para CPF duplicado, usando `sqlalchemy.exc.IntegrityError`.
+* **Adicionar Paginação:** Utilizar a biblioteca `fastapi-pagination` para paginar os resultados das listagens, com os parâmetros `limit` e `offset`.
 
 ### Tecnologias Utilizadas
 
@@ -97,23 +107,16 @@ A API utiliza o FastAPI para receber requisições HTTP. O `Uvicorn` atua como o
 
 ### Como Usar a Aplicação
 
-1.  **Instale as dependências:**
-    * Para executar o projeto, utilizei a [pyenv], com a versão 3.11.4 do `python` para o ambiente virtual.
-    * Caso opte por usar pyenv, após instalar, execute:
-      * `pyenv virtualenv 3.11.4 workoutapi`
-      * `pyenv activate workoutapi`
-      * `pip install -r requirements.txt` 
+A sua API é baseada no `FastAPI`, que utiliza um servidor web assíncrono para rodar. Para colocar a API em funcionamento e começar a interagir com ela, siga os passos abaixo:
 
-2.  **Suba o banco de dados com Docker Compose:**
-    * Em seguida, execute `make run-docker`.
+1.  **Suba o Banco de Dados com Docker Compose:** Certifique-se de que o Docker está instalado e o seu container do banco de dados está rodando. Use o comando `docker-compose up -d`.
+2.  **Rode o Servidor da API:** Com o seu ambiente virtual ativado, execute o servidor `uvicorn` a partir da raiz do projeto.
 
-3.  **Crie as migrações e o banco de dados:**
-    * Para criar uma migration nova, execute `make create-migrations d="nome_da_migration"`.
-    * Para criar o banco de dados, execute `make run-migrations`.
-
-4.  **Suba a API:**
-    * Para subir a API, execute `make run`.
-    * Acesse a documentação interativa em `http://127.0.0.1:8000/docs`.
+    ```bash
+    uvicorn main:app --reload
+    ```
+    O `--reload` faz com que o servidor reinicie automaticamente a cada alteração no código.
+3.  **Acesse a Documentação Interativa:** A sua API é autodescritiva. Acesse `http://127.0.0.1:8000/docs` para interagir com todos os endpoints (`POST`, `GET`, `PATCH`, `DELETE`) de forma visual e intuitiva.
 
 ## Equipe do Projeto
 
